@@ -1,6 +1,13 @@
-test = []
-x = int(input("What is x?"))
+# test = []
+# x = int(input("What is x?"))
+#
+# test.append('x' if x == 1 else '-')
+#
+# print(test)
 
-test.append('x' if x == 1 else '-')
+from itertools import combinations
 
-print(test)
+test = [1,2,3,4]
+
+for i in combinations(test, 3):
+    print(i)

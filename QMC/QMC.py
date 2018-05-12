@@ -104,20 +104,20 @@ def main():
     input_list = []
     starting_minterms = []
     big_table = []
-    pi_chart = []
+    pi_chart = [[]]
     tm_loops = 6
     dc_loops = 2
 
     # Take the input min terms
     for i in range(tm_loops):
-        number = int(input("Give me the tm: "))
+        number = input("Give me the tm: ")
         tm.append(number)
-        input_list.append(number)
+        input_list.append(int(number))
 
     for i in range(dc_loops):
-        number = int(input("Give me the dc: "))
+        number = input("Give me the dc: ")
         dc.append(number)
-        input_list.append(number)
+        input_list.append(int(number))
 
     filler = digit_filler(input_list)
     input_list.sort()
@@ -132,13 +132,24 @@ def main():
 
     big_table = bt_maker(big_table)
 
+    for i in big_table[-1]:
+        pi_chart[0].append(i.number)
+
     pi_chart.append(tm)
-    pi_chart.append(i.number for i in big_table[-1])
+    pi_chart.append([])
+
+    for matches in pi_chart[0]:
+        for tms in pi_chart[1]:
+            if tms in matches:
+                pi_chart[2].append('x')
+            else:
+                pi_chart[2].append('-')
 
     # Debugging print
     for i in big_table:
         print(i)
 
+    print(pi_chart)
     print("tms: ", tm)
     print("dcs: ", dc)
 
