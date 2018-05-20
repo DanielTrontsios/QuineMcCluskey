@@ -5,9 +5,31 @@
 #
 # print(test)
 
-from itertools import combinations
+# from itertools import combinations
+#
+# test = [1,2,3,4]
+#
+# for i in combinations(test, 3):
+#     print(i)
 
-test = [1,2,3,4]
+# string = "1,2,3,4,5,6"
+# ls = []
+#
+# for i in string.split(','):
+#     ls.append(int(i))
+#
+# print(ls)
 
-for i in combinations(test, 3):
-    print(i)
+test = [[8, 9, 10, 11], [8, 10, 12, 14], [10, 11, 14, 15]]
+tm = [4, 8, 10, 11, 12, 15]
+result = []
+
+for matches in test:
+    result.append([])
+    for i in tm:
+        if i in matches:
+            result[-1].append('x')
+        else:
+            result[-1].append('-')
+
+print(result)

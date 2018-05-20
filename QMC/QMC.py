@@ -98,26 +98,47 @@ def bt_maker(minterms):
     return results
 
 
+def pic_maker(last_step_table, true_minterms):
+    lst = last_step_table
+    tm = true_minterms
+    pi_chart = [[]]
+
+    for i in lst:
+        pi_chart[0].append(list(map(int, i.number.split(','))))
+
+    pi_chart.append(tm)
+    pi_chart.append([])
+
+    for matches in pi_chart[0]:
+        pi_chart[2].append([])
+        for i in tm:
+            if i in matches:
+                pi_chart[2][-1].append('x')
+            else:
+                pi_chart[2][-1].append('-')
+
+    return pi_chart
+
+
 def main():
     tm = []
     dc = []
     input_list = []
     starting_minterms = []
     big_table = []
-    pi_chart = [[]]
     tm_loops = 6
     dc_loops = 2
 
     # Take the input min terms
     for i in range(tm_loops):
-        number = input("Give me the tm: ")
+        number = int(input("Give me the tm: "))
         tm.append(number)
-        input_list.append(int(number))
+        input_list.append(number)
 
     for i in range(dc_loops):
-        number = input("Give me the dc: ")
+        number = int(input("Give me the dc: "))
         dc.append(number)
-        input_list.append(int(number))
+        input_list.append(number)
 
     filler = digit_filler(input_list)
     input_list.sort()
@@ -132,26 +153,13 @@ def main():
 
     big_table = bt_maker(big_table)
 
-    for i in big_table[-1]:
-        pi_chart[0].append(i.number)
-
-    pi_chart.append(tm)
-    pi_chart.append([])
-
-    for matches in pi_chart[0]:
-        for tms in pi_chart[1]:
-            if tms in matches:
-                pi_chart[2].append('x')
-            else:
-                pi_chart[2].append('-')
+    prime_implicant_chart = pic_maker(big_table[-1], tm)
 
     # Debugging print
     for i in big_table:
         print(i)
 
-    print(pi_chart)
-    print("tms: ", tm)
-    print("dcs: ", dc)
+    print(prime_implicant_chart)
 
 
 if __name__ == "__main__":
